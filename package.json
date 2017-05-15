@@ -1,5 +1,5 @@
 {
-  "name": "store-ancillary",
+  "name": "redux-store-ancillary",
   "version": "0.0.1",
   "description": "Extend redux store by common reducers",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/talibasya/store-ancillary.git"
+    "url": "git+https://github.com/talibasya/redux-store-ancillary.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/talibasya/store-ancillary/issues"
+    "url": "https://github.com/talibasya/redux-store-ancillary/issues"
   },
-  "homepage": "https://github.com/talibasya/store-ancillary#readme"
+  "homepage": "https://github.com/talibasya/redux-store-ancillary#readme"
 }
