@@ -95,7 +95,7 @@ const ACTION_HANDLERS = {
     })
 
     return newState
-  }
+  },
   [cleanStackType]: (state, action) => {
     return []
   }
