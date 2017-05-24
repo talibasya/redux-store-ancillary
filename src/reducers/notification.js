@@ -1,3 +1,5 @@
+import { randomId } from '../utils/math'
+
 export let showNotificationType = 'MIDDLEWARE/SHOW_NOTIFICATION'
 export let hideNotificationType = 'MIDDLEWARE/HIDE_NOTIFICATION'
 
@@ -22,12 +24,6 @@ export const showInfo = (payload) => showNotification('info', payload)
 const initialState = []
 
 const deepCopy = (state) => ([...state])
-
-const randomId = () => {
-  const randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26))
-  const uniqid = randLetter + Date.now()
-  return uniqid
-}
 
 const ACTION_HANDLERS = {
   [showNotificationType]: (state, action) => {
