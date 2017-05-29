@@ -75,7 +75,7 @@ const ACTION_HANDLERS = {
 
     const newState = copyState.map(popup => {
       if (popup.name !== action.name) return popup
-      const newPopupState = {
+      return {
         ...popup,
         params: action.payload
       }
@@ -88,7 +88,7 @@ const ACTION_HANDLERS = {
 
     const newState = copyState.map(popup => {
       if (popup.id !== action.id) return popup
-      const newPopupState = {
+      return {
         ...popup,
         params: action.payload
       }
