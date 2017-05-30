@@ -1,0 +1,32 @@
+import React from 'react'
+
+class PopupProvider extends React.Component {
+
+  render () {
+    const { children, popup } = this.props
+
+    const Parent = React.cloneElement(children)
+    let modifiedChildren = []
+
+    React.Children.forEach(children, child => {
+      React.Children.forEach(child.props.children, child2 => {
+        const currentPopup = popup.find(popup => popup.name === child2.props.name)
+        const params = currentPopup ? currentPopup.params : undefined
+        const open = !!currentPopup
+
+        const clonedElement = React.cloneElement(child2, { open, params });
+        modifiedChildren.push(clonedElement)
+      })
+    })
+
+    // console.log('children2', modifiedChildren[0]);
+
+    return (
+      <Parent.type {...Parent.props} >
+        {React.Children.toArray(modifiedChildren)}
+      </Parent.type>
+    )
+  }
+}
+
+export default PopupProvider
