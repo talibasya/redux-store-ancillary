@@ -11,6 +11,11 @@ class AppNotification extends React.Component {
     this.withChildren = !!this.props.children
   }
 
+  removeNotificationItem = id => () => {
+    this.showing = this.showing.filter(notifItem => notifItem.id !== id)
+    this.forceUpdate()
+  }
+
   componentWillUpdate (nextProps, nextState) {
     const newNotifications = this.getArrayDifference(nextProps.notification, this.props.notification)
 
@@ -27,7 +32,7 @@ class AppNotification extends React.Component {
       formatNewNotifications = newNotifications.map(notifItem => ({
         ...notifItem,
         open: true,
-        onClose: () => console.log('emit remove item from state')
+        updateState: this.removeNotificationItem(notifItem.id)
       }))
 
       if (!this.props.autoClose) {
