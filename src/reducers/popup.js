@@ -28,7 +28,7 @@ export const cleanStack = () => ({
 const initialState = []
 
 const deepCopy = (state) => {
-  return state.map(popup => ({...popup})).slice()
+  return state.map(popup => ({...popup}))
 }
 
 const ACTION_HANDLERS = {

@@ -3,6 +3,8 @@
     "transform-export-extensions",
     "transform-object-rest-spread",
     "transform-es2015-modules-commonjs",
-    "transform-react-jsx"
+    "transform-react-jsx",
+    "transform-es2015-arrow-functions",
+    "transform-class-properties"
   ]
 }

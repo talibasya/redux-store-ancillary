@@ -1,4 +1,5 @@
 import { randomId } from '../utils/math'
+export NotificationProvider from '../providers/NotificationProvider'
 
 export let showNotificationType = 'MIDDLEWARE/SHOW_NOTIFICATION'
 export let hideNotificationType = 'MIDDLEWARE/HIDE_NOTIFICATION'
