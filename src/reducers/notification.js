@@ -3,6 +3,7 @@ export NotificationProvider from '../providers/NotificationProvider'
 
 export let showNotificationType = 'MIDDLEWARE/SHOW_NOTIFICATION'
 export let hideNotificationType = 'MIDDLEWARE/HIDE_NOTIFICATION'
+export let cleanStackType = 'MIDDLEWARE/CLEAR_STACK'
 
 export const showNotification = (level, payload) => ({
   type: showNotificationType,
@@ -15,6 +16,10 @@ export const hideNotification = (id) => ({
   payload: {
     id
   }
+})
+
+export const cleanStack = () => ({
+  type: cleanStackType
 })
 
 export const showError = (payload) => showNotification('error', payload)
@@ -41,7 +46,8 @@ const ACTION_HANDLERS = {
   [hideNotificationType]: (state, action) => {
     const newState = state.filter(notificationItem => notificationItem.id !== action.payload.id)
     return newState
-  }
+  },
+  [cleanStackType]: (state, action) => []
 }
 
 const reducer = (state = initialState, action) => {
