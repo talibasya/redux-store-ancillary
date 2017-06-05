@@ -23,7 +23,7 @@ class PopupProvider extends React.Component {
 
     return (
       <Parent.type {...Parent.props} >
-        {React.Children.toArray(modifiedChildren)}
+        {modifiedChildren.map(Component => <Component.type {...Component.props} key={Component.props.name} />) }
       </Parent.type>
     )
   }

@@ -6,14 +6,20 @@ class AppNotification extends React.Component {
   showing = []
   withChildren = false
 
+  closeTimeouts = []
+
   constructor (props) {
     super(props)
     this.withChildren = !!this.props.children
   }
 
-  removeNotificationItem = id => () => {
-    this.showing = this.showing.filter(notifItem => notifItem.id !== id)
+  removeNotifComponent = id => () => {
+    this.showing = this.showing.filter(notifItem => notifItem.props.id !== id)
     this.forceUpdate()
+  }
+
+  componentWillMount() {
+    this.closeTimeouts.map(timeoutItem => clearTimeout(timeoutItem))
   }
 
   componentWillUpdate (nextProps, nextState) {
@@ -29,38 +35,35 @@ class AppNotification extends React.Component {
     let formatOldNotifications = [];
 
     if (this.withChildren) {
-      formatNewNotifications = newNotifications.map(notifItem => ({
-        ...notifItem,
-        open: true,
-        updateState: this.removeNotificationItem(notifItem.id)
-      }))
-
-      if (!this.props.autoClose) {
-        formatOldNotifications = this.showing.map(notifItem => {
-          const stillOpen = nextProps.notification.some(nextNotif => nextNotif.id === notifItem.id )
-          if (stillOpen) return notifItem
-
-          return {
-            ...notifItem,
-            open: false
-          }
+      formatNewNotifications = newNotifications.map(notifItem => {
+        return React.cloneElement(this.props.children.props.children, {
+          ...notifItem,
+          open: true
         })
-      }
+      })
+
+      formatOldNotifications = this.showing.map(notifItem => {
+        const stillOpen = nextProps.notification.some(nextNotif => nextNotif.id === notifItem.props.id )
+        if (stillOpen) return notifItem
+
+        let timeout = 0
+        if (notifItem.props.timeout) timeout = notifItem.props.timeout
+
+        this.closeTimeouts.push(
+          setTimeout(this.removeNotifComponent(notifItem.props.id), timeout)
+        )
+
+        return React.cloneElement(notifItem, {
+          ...notifItem.props,
+          open: false
+        })
+      })
+
+      this.showing = [
+        ...formatOldNotifications,
+        ...formatNewNotifications
+      ]
     }
-
-    this.showing = [
-      ...formatOldNotifications,
-      ...formatNewNotifications
-    ]
-
-  }
-
-  filterActive = (notifications) => {
-    const stillShowing = notifications.filter(propNotif => {
-      return this.showing.some(stateNotif => stateNotif.id === propNotif.id)
-    })
-
-    return stillShowing
   }
 
   onRemoveHandler = (id) => () => {
@@ -72,17 +75,20 @@ class AppNotification extends React.Component {
   })
 
   render () {
+
+    if (!this.props.children) return null
+
     const Parent = React.cloneElement(this.props.children)
 
-    const elements = this.showing.map(notifItem => (
-      React.cloneElement(Parent.props.children, {
-        ...notifItem
-      })
-    ))
+    // const elements = this.components.map(notifItem => (
+    //   React.cloneElement(Parent.props.children, {
+    //     ...notifItem
+    //   })
+    // ))
 
     return (
       <Parent.type {...Parent.props} >
-        { React.Children.toArray(elements) }
+        { this.showing.map(Component => <Component.type {...Component.props} key={Component.props.id} />) }
       </Parent.type>
     )
   }
