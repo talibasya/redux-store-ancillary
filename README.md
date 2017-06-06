@@ -28,7 +28,7 @@ Prepare container (examples):
 - [spinner](https://gist.github.com/talibasya/699cd45368bb825527b639a3c8f84b82#file-appspinner-js)
 
 Connect action creators:
-```javascript
+```diff
 import React from 'react'
 import { connect } from 'react-redux'
 + import { showSuccess, showError, cleanStack as cleanNotificationStack } from 'redux-store-ancillary/notification'
