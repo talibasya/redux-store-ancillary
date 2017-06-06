@@ -6,7 +6,7 @@ Ready common logic flow for popup, notification and spinner. Easy to integrate t
 Install your package:
 `npm install --save git+https://github.com/talibasya/redux-store-ancillary.git`
 Then attach reducers to your project:
-```javascript
+```diff
 import locationReducer from './location' // your reducers. Was here before
 + import notification from 'redux-store-ancillary/notification'
 + import spinner from 'redux-store-ancillary/spinner'
