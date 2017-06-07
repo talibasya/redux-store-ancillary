@@ -8,7 +8,8 @@ export let cleanStackType = 'MIDDLEWARE/CLEAR_STACK'
 export const showNotification = (level, payload) => ({
   type: showNotificationType,
   level,
-  payload
+  payload,
+  id: randomId()
 })
 
 export const hideNotification = (id) => ({
@@ -36,7 +37,7 @@ const ACTION_HANDLERS = {
     const newState = deepCopy(state)
 
     newState.push({
-      id: randomId(),
+      id: action.id,
       level: action.level,
       params: action.payload
     })
