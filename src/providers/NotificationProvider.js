@@ -18,7 +18,7 @@ class AppNotification extends React.Component {
     this.forceUpdate()
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     this.closeTimeouts.map(timeoutItem => clearTimeout(timeoutItem))
   }
 
