@@ -4,7 +4,13 @@
 Ready common logic flow for popup, notification and spinner. Easy to integrate to your project based on `react` `redux` + `redux-thunk`. Compatible with `react-native` and `react-vr`.
 ### Getting started
 Install your package:
+
 `npm install --save git+https://github.com/talibasya/redux-store-ancillary.git`
+
+OR
+
+`npm install --S redux-store-ancillary.git`
+
 Then attach reducers to your project:
 ```diff
 import locationReducer from './location' // your reducers. Was here before
