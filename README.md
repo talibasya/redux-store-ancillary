@@ -9,7 +9,7 @@ Install your package:
 
 OR
 
-`npm i -S redux-store-ancillary.git`
+`npm i -S redux-store-ancillary`
 
 Then attach reducers to your project:
 ```diff
