@@ -12,21 +12,21 @@ export const hideSpinner = (payload) => ({
 })
 
 const initialState = {
-  list: [],
+  items: {},
   rendering: null
 }
 
-const deepCopy = (state) => ({ ...state, list: [...state.list] })
+const deepCopy = (state) => ({ ...state, items: [...state.items] })
 
 const ACTION_HANDLERS = {
   [showSpinnerType]: (state, action) => {
     const newState = deepCopy(state)
 
     if (action.payload && action.payload.id) {
-      newState.list.push({
+      newState.items[action.payload.id] = {
         params: action.payload,
         id: action.payload.id
-      })
+      }
     } else {
       newState.rendering = {
         params: action.payload
@@ -39,7 +39,7 @@ const ACTION_HANDLERS = {
     const newState = deepCopy(state)
 
     if (action.payload && action.payload.id) {
-      newState.list = newState.list.filter(spinnerItem => spinnerItem.id !== action.payload.id)
+      delete newState.items[action.payload.id]
     } else {
       newState.rendering = null
     }

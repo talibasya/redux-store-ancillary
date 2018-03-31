@@ -10,7 +10,7 @@ class PopupProvider extends React.Component {
 
     React.Children.forEach(children, child => {
       React.Children.forEach(child.props.children, child2 => {
-        const currentPopup = popup.find(popup => popup.name === child2.props.name)
+        const currentPopup = popup[popup.name]
         const params = currentPopup ? currentPopup.params : undefined
         const open = !!currentPopup
 

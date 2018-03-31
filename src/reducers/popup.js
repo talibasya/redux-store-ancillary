@@ -25,46 +25,43 @@ export const cleanStack = () => ({
   type: cleanStackType
 })
 
-const initialState = []
+const initialState = {}
 
-const deepCopy = (state) => {
-  return state.map(popup => ({...popup}))
-}
+const deepCopy = (state) => ({ ...state })
 
 const ACTION_HANDLERS = {
   [showPopupType]: (state, action) => {
     const newState = deepCopy(state)
 
-    if (!newState.some(popup => popup.name === action.name)) {
-      newState.push({
+    if (!newState[action.name]) {
+      newState[action.name] = {
         name: action.name,
         params: action.payload
-      })
+      }
     }
 
     return newState
   },
   [hidePopupType]: (state, action) => {
     let newState = deepCopy(state)
+    delete newState[action.name]
 
-    newState = newState.filter(popupItem => popupItem.name !== action.name)
     return newState
   },
   [updatePopupType]: (state, action) => {
-    let copyState = deepCopy(state)
+    let newState = deepCopy(state)
 
-    const newState = copyState.map(popup => {
-      if (popup.name !== action.name) return popup
-      return {
-        ...popup,
+    if (newState[action.name]) {
+      newState[action.name] = {
+        ...copyState[action.name],
         params: action.payload
       }
-    })
+    }
 
     return newState
   },
   [cleanStackType]: (state, action) => {
-    return []
+    return {}
   }
 }
 

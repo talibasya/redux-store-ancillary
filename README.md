@@ -52,13 +52,13 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  spinner: state.spinner
+  spinner: state.spinner['myownSpinner']
 })
 
 export class HomeView extends React.Component {
 
   render () {
-    const isExistMyOwnSpinner = this.props.spinner.list.find(item => item.id === 'myownSpinner')
+    const isExistMyOwnSpinner = this.props.spinner
     return (
       <div>
         <h4>Welcome!</h4>
