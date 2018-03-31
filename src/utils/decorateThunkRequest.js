@@ -12,7 +12,7 @@ const decorateThunkRequest = ({ onCall, onSuccess, onError }) => (params) => {
   return (dispatch, getState) => {
     dispatch(showSpinner(spinner))
     onCall({ dispatch, getState, call })
-      .then((...response) => {
+      .then(response => {
         dispatch(hideSpinner(spinner))
         onSuccess({ dispatch, getState, response, call, success })
       })
