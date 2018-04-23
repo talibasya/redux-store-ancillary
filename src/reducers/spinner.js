@@ -16,7 +16,7 @@ const initialState = {
   rendering: null
 }
 
-const deepCopy = (state) => ({ ...state, items: [...state.items] })
+const deepCopy = (state) => ({ ...state, items: {...state.items} })
 
 const ACTION_HANDLERS = {
   [showSpinnerType]: (state, action) => {

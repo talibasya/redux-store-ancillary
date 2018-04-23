@@ -1,7 +1,7 @@
 import { showSpinner, hideSpinner } from '../reducers/spinner'
 import { showError } from '../reducers/notification'
 
-const decorateThunkRequest = ({ onCall, onSuccess, onError }) => (params) => {
+const decorateThunkRequest = ({ onCall, onSuccess, onError, noSpinner }) => (params) => {
   let call, success, spinner
   if (params) {
     call = params.call
@@ -10,14 +10,14 @@ const decorateThunkRequest = ({ onCall, onSuccess, onError }) => (params) => {
   }
 
   return (dispatch, getState) => {
-    dispatch(showSpinner(spinner))
+    if (!noSpinner) dispatch(showSpinner(spinner))
     onCall({ dispatch, getState, call })
       .then(response => {
-        dispatch(hideSpinner(spinner))
+        if (!noSpinner) dispatch(hideSpinner(spinner))
         onSuccess({ dispatch, getState, response, call, success })
       })
       .catch(error => {
-        dispatch(hideSpinner(spinner))
+        if (!noSpinner) dispatch(hideSpinner(spinner))
         if (onError) onError({ dispatch, getState, call, error })
         else dispatch(showError(error))
       })
