@@ -1,12 +1,11 @@
 import React from 'react'
 
 class PopupProvider extends React.Component {
-
-  render () {
+  render() {
     const { children, popup } = this.props
 
     const Parent = React.cloneElement(children)
-    let modifiedChildren = []
+    const modifiedChildren = []
 
     React.Children.forEach(children, child => {
       React.Children.forEach(child.props.children, child2 => {
@@ -14,16 +13,18 @@ class PopupProvider extends React.Component {
         const params = currentPopup ? currentPopup.params : undefined
         const open = !!currentPopup
 
-        const clonedElement = React.cloneElement(child2, { open, params });
-        modifiedChildren.push(clonedElement)
+        const clonedElement = React.cloneElement(child2, { open, params })
+        if (popup.findIndex(element => element.name === clonedElement.props.name) !== -1) {
+          modifiedChildren.push(clonedElement)
+        }
       })
     })
 
     // console.log('children2', modifiedChildren[0]);
 
     return (
-      <Parent.type {...Parent.props} >
-        {modifiedChildren.map(Component => <Component.type {...Component.props} key={Component.props.name} />) }
+      <Parent.type {...Parent.props}>
+        {modifiedChildren.map(Component => <Component.type {...Component.props} key={Component.props.name} />)}
       </Parent.type>
     )
   }
