@@ -1,18 +1,19 @@
 {
   "plugins": [
-    "transform-export-extensions",
-    "transform-object-rest-spread",
-    "transform-es2015-modules-commonjs",
-    "transform-react-jsx",
-    "transform-es2015-arrow-functions",
-    "transform-class-properties",
-    "transform-es2015-block-scoping",
-    "transform-es2015-shorthand-properties",
-    "transform-es2015-computed-properties",
-    "transform-es2015-spread",
-    "transform-es2015-parameters",
-    "transform-es2015-classes",
-    "transform-es2015-destructuring",
-    "transform-es2015-block-scoped-functions"
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-transform-block-scoped-functions",
+    "@babel/plugin-transform-block-scoping",
+    "@babel/plugin-transform-classes",
+    "@babel/plugin-transform-computed-properties",
+    "@babel/plugin-transform-destructuring",
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-transform-parameters",
+    "@babel/plugin-transform-react-jsx",
+    "@babel/plugin-transform-shorthand-properties",
+    "@babel/plugin-transform-spread",
+    "@babel/plugin-proposal-export-namespace-from",
+    "@babel/plugin-proposal-export-default-from"
   ]
 }
